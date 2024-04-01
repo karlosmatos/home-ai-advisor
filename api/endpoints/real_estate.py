@@ -1,5 +1,5 @@
 from bson import json_util
-import requests
+from openai import OpenAI
 import json
 
 from fastapi import APIRouter, HTTPException
@@ -33,25 +33,19 @@ async def search_real_estate(query: str):
 
 @router.get("/openai/{prompt}")
 async def get_openai_response(prompt: str):
-    headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + settings.OPENAI_API_KEY,
-    }
+    client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
-    json_data = {
-        'model': 'gpt-3.5-turbo',
-        'messages': [
-            {
-                'role': 'user',
-                'content': prompt,
-            },
-        ],
-        'temperature': 1,
-        'max_tokens': 256,
-        'top_p': 1,
-        'frequency_penalty': 0,
-        'presence_penalty': 0,
-    }
+    completion = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "system", "content": """
+         You are a AI home advisor. 
+         You are helping a user find a new home. 
+         You provide home parameters and recommendations based on the user's input. 
+         The output must be in JSON format.
+         """},
+        {"role": "user", "content": prompt}
+    ]
+    )
 
-    response = requests.post('https://api.openai.com/v1/chat/completions', headers=headers, json=json_data)
-    return response.json()
+    return json.loads(completion.choices[0].message.content)
