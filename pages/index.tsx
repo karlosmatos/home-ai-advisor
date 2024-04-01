@@ -32,7 +32,7 @@ const Home: NextPage = () => {
     setLoading(true);
   
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation`, {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },

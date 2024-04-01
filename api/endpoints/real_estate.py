@@ -57,7 +57,7 @@ async def get_openai_response(life_situation: str, monthly_income_range: str):
 
     return json.loads(completion.choices[0].message.content)
 
-@router.post("/real_estate_recommendation/")
+@router.get("/real_estate_recommendation/")
 async def get_real_estate_by_location_price_size(filter: RealEstateFilter):
     openai_response = await get_openai_response(filter.life_situation, filter.monthly_income_range)
     print(openai_response)
