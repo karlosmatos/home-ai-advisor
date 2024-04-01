@@ -1,3 +1,5 @@
 fastapi==0.109.0
 uvicorn==0.26.0
 python-decouple==3.8
+pymongo==4.6.3
+requests==2.31.0
