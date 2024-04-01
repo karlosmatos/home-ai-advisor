@@ -38,3 +38,67 @@ next-env.d.ts
 
 # idea
 .idea
+
+# Python
+*.py[cod]
+*.pyd
+*.pyo
+*.pyz
+*.pyi
+*.pyx
+*.px[di]
+*.pxd
+*.pyc
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyCharm
+.idea/
+*.iml
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# environment
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
