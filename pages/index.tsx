@@ -3,17 +3,19 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
-import DropDown, { VibeType } from '../components/DropDown';
+import DropDown, { IncomeType } from '../components/DropDown';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import LoadingDots from '../components/LoadingDots';
 import Toggle from '../components/Toggle';
+import { set } from 'react-hook-form';
 
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
-  const [property, setProperty] = useState('');
-  const [vibe, setVibe] = useState<VibeType>('Professional');
+  const [lifeSituation, setLifeSituation] = useState('');
+  const [income, setIncome] = useState<IncomeType>('10,000 - 25,000 CZK');
   const [generatedProperties, setGeneratedProperties] = useState<any[]>([]);
+  const [generatedAIResponse, setGeneratedAIResponse] = useState<any[]>([]);
   const [isGPT, setIsGPT] = useState(false);
 
   const propertyRef = useRef<null | HTMLDivElement>(null);
@@ -29,8 +31,15 @@ const Home: NextPage = () => {
     setGeneratedProperties([]);
     setLoading(true);
   
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate`, {
-      method: 'GET',
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "life_situation": lifeSituation,
+        "monthly_income_range": income
+      }),
     });
   
     if (!response.ok) {
@@ -38,7 +47,8 @@ const Home: NextPage = () => {
     }
   
     const data = await response.json();
-    setGeneratedProperties(data);
+    setGeneratedProperties(data.real_estate_list);
+    setGeneratedAIResponse(data.openai_response);
     scrollToProperties();
     setLoading(false);
   };
@@ -77,18 +87,18 @@ const Home: NextPage = () => {
             </p>
           </div>
           <textarea
-            value={property}
-            onChange={(e) => setProperty(e.target.value)}
+            value={lifeSituation}
+            onChange={(e) => setLifeSituation(e.target.value)}
             rows={4}
             className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
-            placeholder={'e.g. 25 years old, single, working as a software engineer, looking for a new home in Prague.'}
+            placeholder={'e.g. 25 years old, single, working as a software engineer, looking for a new home to rent in Prague.'}
           />
           <div className="flex mb-5 items-center space-x-3">
             <Image src="/2-black.png" width={30} height={30} alt="1 icon" />
-            <p className="text-left font-medium">Select your vibe.</p>
+            <p className="text-left font-medium">Select your monthly net income.</p>
           </div>
           <div className="block">
-            <DropDown vibe={vibe} setVibe={(newVibe) => setVibe(newVibe)} />
+            <DropDown income={income} setIncome={(newIncome) => setIncome(newIncome)} />
           </div>
 
           {!loading && (
@@ -115,6 +125,14 @@ const Home: NextPage = () => {
         />
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
         <div className="space-y-10 my-10">
+          {generatedAIResponse && (
+            <div>
+              <h2 className="sm:text-4xl text-3xl font-bold text-slate-900 mx-auto">
+                AI Recommendation
+              </h2>
+              <p className="bg-white rounded-xl shadow-md overflow-hidden text-md mt-5 p-4">{generatedAIResponse}</p>
+            </div>
+          )}
           {generatedProperties && (
             <>
               <div>
