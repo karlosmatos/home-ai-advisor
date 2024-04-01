@@ -1,6 +1,6 @@
 {
   "name": "@ai-home-advisor",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "fastapi-dev": "pip install -r requirements.txt && python -m uvicorn api.index:app --reload",
@@ -18,17 +18,14 @@
     "@vercel/analytics": "^0.1.8",
     "concurrently": "^8.2.2",
     "eventsource-parser": "^0.0.5",
-    "groq-sdk": "^0.3.2",
     "next": "^14.0.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.42.0",
     "react-hot-toast": "^2.4.0",
-    "react-use-measure": "^2.1.1",
-    "together-ai": "^0.5.2"
+    "react-use-measure": "^2.1.1"
   },
   "devDependencies": {
-    "@types/node": "18.11.3",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
     "autoprefixer": "^10.4.12",
