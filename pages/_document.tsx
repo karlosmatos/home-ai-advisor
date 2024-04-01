@@ -8,27 +8,27 @@ class MyDocument extends Document {
           <link rel="icon" href="/favicon.ico" />
           <meta
             name="description"
-            content="Generate your next Twitter bio in seconds."
+            content="Get your new home ideas in seconds."
           />
-          <meta property="og:site_name" content="twitterbio.io" />
+          <meta property="og:site_name" content="home-ai-advisor.vercel.app" />
           <meta
             property="og:description"
-            content="Generate your next Twitter bio in seconds."
+            content="Get your new home ideas in seconds."
           />
-          <meta property="og:title" content="Twitter Bio Generator" />
+          <meta property="og:title" content="AI Home Advisor" />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Twitter Bio Generator" />
+          <meta name="twitter:title" content="AI Home Advisor" />
           <meta
             name="twitter:description"
-            content="Generate your next Twitter bio in seconds."
+            content="Get your new home ideas in seconds."
           />
           <meta
             property="og:image"
-            content="https://twitterbio.io/og-image.png"
+            content="https://home-ai-advisor.vercel.app/og-image.png"
           />
           <meta
             name="twitter:image"
-            content="https://twitterbio.io/og-image.png"
+            content="https://home-ai-advisor.vercel.app/og-image.png"
           />
         </Head>
         <body>
