@@ -2,6 +2,9 @@
   "name": "@ai-home-advisor",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "python": "3.9.0"
+    },
   "scripts": {
     "fastapi-dev": "pip install -r requirements.txt && python -m uvicorn api.index:app --reload",
     "next-dev": "next dev",
