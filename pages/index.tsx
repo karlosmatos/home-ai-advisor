@@ -37,6 +37,7 @@ const Home: NextPage = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        "is_gpt": isGPT,
         "life_situation": lifeSituation,
         "monthly_income_range": income
       }),
@@ -48,7 +49,7 @@ const Home: NextPage = () => {
   
     const data = await response.json();
     setGeneratedProperties(data.real_estate_list);
-    setGeneratedAIResponse(data.openai_response);
+    setGeneratedAIResponse(data.ai_response);
     scrollToProperties();
     setLoading(false);
   };
