@@ -31,8 +31,11 @@ const Home: NextPage = () => {
     setGeneratedProperties([]);
     setLoading(true);
   
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation/`, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         "life_situation": lifeSituation,
         "monthly_income_range": income
