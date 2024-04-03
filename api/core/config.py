@@ -6,6 +6,7 @@ class Settings():
     PROJECT_NAME: str = 'AI Home Advisor'
     MONGO_URI: str = config('MONGO_URI')
     OPENAI_API_KEY: str = config('OPENAI_API_KEY')
+    GROQ_API_KEY: str = config('GROQ_API_KEY')
     CORS_ORIGINS: List[AnyHttpUrl] = ['http://localhost:3000', 'https://home-ai-advisor.vercel.app/']
 
     class Config:
