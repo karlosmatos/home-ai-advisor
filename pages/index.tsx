@@ -31,9 +31,13 @@ const Home: NextPage = () => {
     setGeneratedProperties([]);
     setLoading(true);
   
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation/`, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
+        "is_gpt": isGPT,
         "life_situation": lifeSituation,
         "monthly_income_range": income
       }),
@@ -45,7 +49,7 @@ const Home: NextPage = () => {
   
     const data = await response.json();
     setGeneratedProperties(data.real_estate_list);
-    setGeneratedAIResponse(data.openai_response);
+    setGeneratedAIResponse(data.ai_response);
     scrollToProperties();
     setLoading(false);
   };

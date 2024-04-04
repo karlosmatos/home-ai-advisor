@@ -3,3 +3,4 @@ uvicorn==0.26.0
 python-decouple==3.8
 pymongo==4.6.3
 openai==1.14.3
+groq==0.4.2
