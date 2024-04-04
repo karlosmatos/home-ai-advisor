@@ -15,7 +15,11 @@ client = MongoClient(settings.MONGO_URI)
 db = client['realestatecluster']
 collection = db['sreality']
 
-@router.get("/real_estate")
+@router.get("/")
+async def root():
+    return {"message": "Hello World"}
+
+@router.get("/real_estate/")
 async def get_real_estate():
     real_estate = collection.find({}).limit(6)
     return json.loads(json_util.dumps(list(real_estate)))

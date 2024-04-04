@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 from api.core.config import settings
 from . import router as api_router
 
@@ -7,8 +8,9 @@ app = FastAPI(title=settings.PROJECT_NAME)
 
 # Set up CORS
 app.add_middleware(
+    HTTPSRedirectMiddleware,
     CORSMiddleware,
-    allow_origins=["*"], # settings.CORS_ORIGINS
+    allow_origins=settings.CORS_ORIGINS
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
