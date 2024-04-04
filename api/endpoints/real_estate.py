@@ -24,6 +24,10 @@ async def get_real_estate():
     real_estate = collection.find({}).limit(6)
     return json.loads(json_util.dumps(list(real_estate)))
 
+@router.get("/real_estate_1")
+async def get_real_estate_1():
+    return {"message": "Hello World"}
+
 @router.post("/real_estate_recommendation")
 async def get_real_estate_by_location_price_size(filter: RealEstateFilter):
     if filter.is_gpt:
