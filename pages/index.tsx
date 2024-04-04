@@ -31,9 +31,10 @@ const Home: NextPage = () => {
     setGeneratedProperties([]);
     setLoading(true);
   
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation/`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation`, {
       method: 'POST',
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({

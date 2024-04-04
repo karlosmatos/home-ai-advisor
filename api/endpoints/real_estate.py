@@ -19,12 +19,12 @@ collection = db['sreality']
 async def root():
     return {"message": "Hello World"}
 
-@router.get("/real_estate/")
+@router.get("/real_estate")
 async def get_real_estate():
     real_estate = collection.find({}).limit(6)
     return json.loads(json_util.dumps(list(real_estate)))
 
-@router.post("/real_estate_recommendation/")
+@router.post("/real_estate_recommendation")
 async def get_real_estate_by_location_price_size(filter: RealEstateFilter):
     if filter.is_gpt:
         ai_response = await openai_service.get_response(filter.life_situation, filter.monthly_income_range)
