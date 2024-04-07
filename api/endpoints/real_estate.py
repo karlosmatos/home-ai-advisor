@@ -1,6 +1,4 @@
 from bson import json_util
-from openai import OpenAI
-from groq import Groq
 import json
 from fastapi import APIRouter, HTTPException
 from pymongo import MongoClient
@@ -31,6 +29,7 @@ async def get_real_estate_by_location_price_size(filter: RealEstateFilter):
 
     else:
         ai_response = await groq_service.get_response(filter.life_situation, filter.monthly_income_range)
+    print(ai_response)
     real_estate_list = list(collection.find(
         {
             "seo.locality": {"$regex": f".*{ai_response['location']}.*", "$options": "i"},
