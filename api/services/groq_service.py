@@ -14,7 +14,7 @@ async def get_response(life_situation: str, monthly_income_range: str):
                 You are helping a user find a new home. 
                 You provide home parameters and recommendations based on the user's input.
                 Prague = praha
-                Here is the location examples: praha-holesovice, praha-vinohrady, praha-smichov, praha-karlin, praha-vrsovice, praha-zizkov, praha-hlubocepy, praha-kosire, praha-liben, praha-letnany, praha-kobylisy
+                Here is the location examples: praha-holesovice, praha-vinohrady, praha-smichov, praha-karlin, olomouc, prerov, ostrava,
                 The output must be in JSON format.
                 Here is the example output:
                     {
