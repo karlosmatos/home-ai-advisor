@@ -1,32 +1,39 @@
 from bson import json_util
 import json
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pymongo import MongoClient
 
 from api.core.config import settings
 from api.models.real_estate_model import RealEstateFilter
 from api.services import groq_service, openai_service
+from api.db import get_db
 
 router = APIRouter()
 
-client = MongoClient(settings.MONGO_URI)
-db = client['realestatecluster']
-collection = db['sreality']
+def get_collection():
+    client = MongoClient(settings.MONGO_URI)
+    db = client[settings.MONGO_DB]
+    collection = db[settings.MONGO_COLLECTION]
+    return collection
 
 @router.get("/")
 async def root():
     return {"message": "Hello World"}
 
 @router.get("/real_estate/")
-async def get_real_estate():
+async def get_real_estate(collection=Depends(get_collection)):
     real_estate = collection.find({}).limit(6)
     return json.loads(json_util.dumps(list(real_estate)))
 
 @router.post("/real_estate_recommendation/")
-async def get_real_estate_by_location_price_size(filter: RealEstateFilter):
+async def get_real_estate_by_location_price_size(
+    filter: RealEstateFilter, 
+    collection=Depends(get_collection),
+    openai_service=Depends(openai_service),
+    groq_service=Depends(groq_service)
+):
     if filter.is_gpt:
         ai_response = await openai_service.get_response(filter.life_situation, filter.monthly_income_range)
-
     else:
         ai_response = await groq_service.get_response(filter.life_situation, filter.monthly_income_range)
     print(ai_response)
