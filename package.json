@@ -2,13 +2,10 @@
   "name": "@ai-home-advisor",
   "version": "1.0.0",
   "private": true,
-  "engines": {
-    "python": "3.9"
-  },
   "scripts": {
     "fastapi-dev": "pip install -r requirements.txt && python -m uvicorn api.index:app --reload",
     "next-dev": "next dev",
-    "dev": "concurrently \"pnpm run next-dev\" \"pnpm run fastapi-dev\"",
+    "dev": "concurrently \"npm run next-dev\" \"npm run fastapi-dev\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
