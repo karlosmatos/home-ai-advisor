@@ -20,7 +20,7 @@ AI Home Advisor uses both [Mixtral](https://mistral.ai/news/mixtral-of-experts/)
 6. Add the base URL of the API under `NEXT_PUBLIC_API_BASE_URL` in your `.env`. If you are running the application locally, it should be `http://localhost:8000`.
 8. Run the scraper to populate the database based on scraper instructions on [GitHub](https://github.com/karlosmatos/sreality-scraper/blob/main/README.md).
 7. Install the dependencies with `npm install`.
-9. Run the application with `npm run dev` and it will be available at `http://localhost:3000`. API will be available at `http://localhost:8000/api/docs`.
+9. Run the application with `npm run dev` and it will be available at `http://localhost:3000`. API will be available at `http://localhost:8000/docs`.
 
 ## One-Click Deploy
 
