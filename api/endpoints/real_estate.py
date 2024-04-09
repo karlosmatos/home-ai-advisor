@@ -28,9 +28,7 @@ async def get_real_estate(collection=Depends(get_collection)):
 @router.post("/real_estate_recommendation/")
 async def get_real_estate_by_location_price_size(
     filter: RealEstateFilter, 
-    collection=Depends(get_collection),
-    openai_service=Depends(openai_service.get_response),
-    groq_service=Depends(groq_service.get_response)
+    collection=Depends(get_collection)
 ):
     if filter.is_gpt:
         ai_response = await openai_service.get_response(filter.life_situation, filter.monthly_income_range)
