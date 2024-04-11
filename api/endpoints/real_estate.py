@@ -19,12 +19,12 @@ def get_collection():
 async def root():
     return {"message": "Hello World"}
 
-@router.get("/real_estate/")
+@router.get("/real_estate")
 async def get_real_estate(collection=Depends(get_collection)):
     real_estate = collection.find({}).limit(6)
     return json.loads(json_util.dumps(list(real_estate)))
 
-@router.post("/real_estate_recommendation/")
+@router.post("/real_estate_recommendation")
 async def get_real_estate_by_location_price_size(
     filter: RealEstateFilter, 
     collection=Depends(get_collection)
