@@ -6,7 +6,6 @@ from pymongo import MongoClient
 from api.core.config import settings
 from api.models.real_estate_model import RealEstateFilter
 from api.services import groq_service, openai_service
-from api.db import get_db
 
 router = APIRouter()
 
