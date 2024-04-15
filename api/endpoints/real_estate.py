@@ -35,15 +35,23 @@ async def get_real_estate_by_location_price_size(
     else:
         ai_response = await groq_service.get_response(filter.life_situation, filter.monthly_income_range)
     print(ai_response)
-    real_estate_list = list(collection.find(
-        {
-            "seo.locality": {"$regex": f".*{ai_response['location']}.*", "$options": "i"},
-            "price": {"$gte": ai_response["price_from"], "$lte": ai_response["price_to"]},
+    if real_estate_list := list(
+        collection.find(
+            {
+                "seo.locality": {
+                    "$regex": f".*{ai_response['location']}.*",
+                    "$options": "i",
+                },
+                "price": {
+                    "$gte": ai_response["price_from"],
+                    "$lte": ai_response["price_to"],
+                },
+            }
+        ).limit(6)
+    ):
+        return {
+            "ai_response": ai_response["my_advise"],
+            "real_estate_list": json.loads(json_util.dumps(real_estate_list))
         }
-    ).limit(6))
-    if not real_estate_list:
+    else:
         raise HTTPException(status_code=404, detail="Real estate not found")
-    return {
-        "ai_response": ai_response["my_advise"],
-        "real_estate_list": json.loads(json_util.dumps(real_estate_list))
-    }
