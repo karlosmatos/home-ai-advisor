@@ -31,7 +31,7 @@ const Home: NextPage = () => {
     setGeneratedProperties([]);
     setLoading(true);
   
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation/real_time`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -149,7 +149,7 @@ const Home: NextPage = () => {
                 {generatedProperties.map((property: any) => (
                   <div
                     className="bg-white rounded-xl shadow-md overflow-hidden"
-                    key={property._id.$oid}
+                    key={property.hash_id}
                   >
                     <div className="relative">
                       <img
