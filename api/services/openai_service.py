@@ -8,6 +8,7 @@ async def get_response(life_situation: str, monthly_income_range: str):
     completion = client.chat.completions.create(
         model=settings.OPENAI_MODEL_NAME,
         temperature=0,
+        response_format={ "type": "json_object" },
         messages=[
             {"role": "system", "content": settings.AI_MESSAGE_SYSTEM},
             {"role": "user", "content": f"I am a {life_situation} with a monthly income of {monthly_income_range}."}
