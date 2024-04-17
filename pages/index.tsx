@@ -17,6 +17,7 @@ const Home: NextPage = () => {
   const [generatedProperties, setGeneratedProperties] = useState<any[]>([]);
   const [generatedAIResponse, setGeneratedAIResponse] = useState<any[]>([]);
   const [isGPT, setIsGPT] = useState(false);
+  const [isRealTime, setIsRealTime] = useState(false);
 
   const propertyRef = useRef<null | HTMLDivElement>(null);
 
@@ -30,8 +31,12 @@ const Home: NextPage = () => {
     e.preventDefault();
     setGeneratedProperties([]);
     setLoading(true);
-  
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation/real_time`, {
+
+    const apiEndpoint = isRealTime
+      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation/real_time`
+      : `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation`;
+
+    const response = await fetch(apiEndpoint, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -73,6 +78,17 @@ const Home: NextPage = () => {
         <div className="mt-7">
           <Toggle isGPT={isGPT} setIsGPT={setIsGPT} />
         </div>
+
+        <div className="mt-3">
+        <label>
+          <input
+            type="checkbox"
+            checked={isRealTime}
+            onChange={(e) => setIsRealTime(e.target.checked)}
+          />
+          Real-time
+        </label>
+      </div>
 
         <div className="max-w-xl w-full">
           <div className="flex mt-10 items-center space-x-3">
