@@ -24,26 +24,7 @@ async def get_real_estate(collection: Collection):
     real_estate_list = await real_estate_cursor.to_list(length=6)
     return json.loads(json_util.dumps(real_estate_list))
 
-async def get_real_estate_by_filter(filter: RealEstateFilter, collection: Collection):
-    """
-    Fetch real estate data based on a filter and AI response.
-    """
-    ai_response = await fetch_ai_response(filter)
-    query = {
-        "seo.locality": {"$regex": f".*{ai_response['location']}.*", "$options": "i"},
-        "price": {"$gte": ai_response["price_from"], "$lte": ai_response["price_to"]},
-    }
-    real_estate_cursor = collection.find(query).limit(6)
-    real_estate_list = await real_estate_cursor.to_list(length=6)
-    if real_estate_list:
-        return {
-            "ai_response": ai_response["my_advise"],
-            "real_estate_list": json.loads(json_util.dumps(real_estate_list))
-        }
-    else:
-        raise HTTPException(status_code=404, detail="Real estate not found")
-
-async def get_real_estate_by_filter_real_time(filter: RealEstateFilter, collection: Collection):
+async def get_real_estate_by_filter_real_time(filter: RealEstateFilter):
     """
     Fetch real estate data based on a filter and AI response, querying in real-time from an external service.
     """
