@@ -1,7 +1,7 @@
 from typing import List
 from pymongo.collection import Collection
 from api.models.real_estate_model import RealEstateFilter
-from api.services import openai_service, groq_service, sreality_service
+from api.services import groq_service, sreality_service
 from bson import json_util
 import json
 
@@ -11,10 +11,10 @@ async def fetch_ai_response(filter: RealEstateFilter):
     """
     Fetch AI response based on the filter using either OpenAI or GROQ service.
     """
-    if filter.is_gpt:
-        return await openai_service.get_response(filter.life_situation, filter.monthly_income_range)
+    if filter.is_llama:
+        return await groq_service.get_llama_response(filter.life_situation, filter.monthly_income_range)
     else:
-        return await groq_service.get_response(filter.life_situation, filter.monthly_income_range)
+        return await groq_service.get_mixtral_response(filter.life_situation, filter.monthly_income_range)
 
 async def get_real_estate(collection: Collection):
     """

@@ -16,8 +16,7 @@ const Home: NextPage = () => {
   const [income, setIncome] = useState<IncomeType>('10,000 - 25,000 CZK');
   const [generatedProperties, setGeneratedProperties] = useState<any[]>([]);
   const [generatedAIResponse, setGeneratedAIResponse] = useState<any[]>([]);
-  const [isGPT, setIsGPT] = useState(false);
-  const [isRealTime, setIsRealTime] = useState(false);
+  const [isLlama, setIsLlama] = useState(false);
 
   const propertyRef = useRef<null | HTMLDivElement>(null);
 
@@ -32,20 +31,18 @@ const Home: NextPage = () => {
     setGeneratedProperties([]);
     setLoading(true);
 
-    const apiEndpoint = isRealTime
-      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation/real_time`
-      : `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation`;
+    const apiEndpoint = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation/real_time`;
 
     const response = await fetch(apiEndpoint, {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        "is_gpt": isGPT,
-        "life_situation": lifeSituation,
-        "monthly_income_range": income
+      "is_llama": isLlama,
+      "life_situation": lifeSituation,
+      "monthly_income_range": income
       }),
     });
   
@@ -76,18 +73,10 @@ const Home: NextPage = () => {
           Get your new home advise based on your life situation
         </h1>
         <div className="mt-7">
-          <Toggle isGPT={isGPT} setIsGPT={setIsGPT} />
+          <Toggle isLlama={isLlama} setIsLlama={setIsLlama} />
         </div>
 
         <div className="mt-3">
-        <label>
-          <input
-            type="checkbox"
-            checked={isRealTime}
-            onChange={(e) => setIsRealTime(e.target.checked)}
-          />
-          Real-time
-        </label>
       </div>
 
         <div className="max-w-xl w-full">
