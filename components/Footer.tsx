@@ -15,12 +15,12 @@ export default function Footer() {
         </a>
         and{' '}
         <a
-          href="https://platform.openai.com/docs/models"
+          href="https://llama.meta.com/llama3/"
           target="_blank"
           rel="noreferrer"
           className="font-bold hover:underline transition underline-offset-2"
         >
-          GPT-3.5
+          Llama 3
         </a>
       </div>
       <div className="flex space-x-4 pb-4 sm:pb-0">

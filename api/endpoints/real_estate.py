@@ -20,16 +20,8 @@ async def root():
 async def get_real_estate(collection: Collection = Depends(get_collection)):
     return await real_estate_service.get_real_estate(collection)
 
-@router.post("/real_estate_recommendation")
-async def get_real_estate_by_location_price_size(
-    filter: RealEstateFilter, 
-    collection: Collection = Depends(get_collection)
-):
-    return await real_estate_service.get_real_estate_by_filter(filter, collection)
-
 @router.post("/real_estate_recommendation/real_time")
 async def get_real_estate_by_location_price_size_real_time(
-    filter: RealEstateFilter, 
-    collection: Collection = Depends(get_collection)
+    filter: RealEstateFilter
 ):
-    return await real_estate_service.get_real_estate_by_filter_real_time(filter, collection)
+    return await real_estate_service.get_real_estate_by_filter_real_time(filter)

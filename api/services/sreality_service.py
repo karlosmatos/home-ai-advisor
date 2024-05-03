@@ -1,6 +1,6 @@
 import aiohttp
 
-async def get_sreality_listings(region: str, action: str, category: str, bedrooms: int, price_from: int, price_to: int, per_page: int = 6):
+async def get_sreality_listings(region: str, action: str, category: str, bedrooms: int, price_from: int, price_to: int, per_page: int = 8):
     action_to_category_type_cb = {
         "buy": 1,
         "rent": 2,

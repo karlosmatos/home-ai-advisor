@@ -16,7 +16,7 @@ const Home: NextPage = () => {
   const [income, setIncome] = useState<IncomeType>('10,000 - 25,000 CZK');
   const [generatedProperties, setGeneratedProperties] = useState<any[]>([]);
   const [generatedAIResponse, setGeneratedAIResponse] = useState<any[]>([]);
-  const [isGPT, setIsGPT] = useState(false);
+  const [isLlama, setIsLlama] = useState(false);
 
   const propertyRef = useRef<null | HTMLDivElement>(null);
 
@@ -30,17 +30,17 @@ const Home: NextPage = () => {
     e.preventDefault();
     setGeneratedProperties([]);
     setLoading(true);
-  
+
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/real_estate_recommendation/real_time`, {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        "is_gpt": isGPT,
-        "life_situation": lifeSituation,
-        "monthly_income_range": income
+      "is_llama": isLlama,
+      "life_situation": lifeSituation,
+      "monthly_income_range": income
       }),
     });
   
@@ -71,8 +71,11 @@ const Home: NextPage = () => {
           Get your new home advise based on your life situation
         </h1>
         <div className="mt-7">
-          <Toggle isGPT={isGPT} setIsGPT={setIsGPT} />
+          <Toggle isLlama={isLlama} setIsLlama={setIsLlama} />
         </div>
+
+        <div className="mt-3">
+      </div>
 
         <div className="max-w-xl w-full">
           <div className="flex mt-10 items-center space-x-3">

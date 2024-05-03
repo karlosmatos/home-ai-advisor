@@ -9,15 +9,15 @@ class Settings():
     MONGO_DB: str = config('MONGO_DB')
     MONGO_COLLECTION: str = config('MONGO_COLLECTION')
 
-    OPENAI_API_KEY: str = config('OPENAI_API_KEY')
-    OPENAI_MODEL_NAME: str = "gpt-3.5-turbo"
-
     GROQ_API_KEY: str = config('GROQ_API_KEY')
-    GROQ_MODEL_NAME: str = "mixtral-8x7b-32768"
+    MIXTRAL_MODEL_NAME: str = "mixtral-8x7b-32768"
+    LLAMA_MODEL_NAME: str = "llama3-70b-8192"
 
     AI_MESSAGE_SYSTEM: str = """You are a AI home advisor.
     You are helping a user find a new home.
     You provide home parameters and recommendations based on the user's input.
+    The rent should be at 33% of the user's monthly income.
+    If the user would like to buy a property, the mortgage payment should be at maximum 30% of the user's monthly income.
     Prague = praha
     The output must be in JSON format.
     Here is the example output:
